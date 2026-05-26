@@ -1,0 +1,25 @@
+{
+  "entities": {
+    "HistoricalRecord": {
+      "title": "Historical Record",
+      "description": "A record of 2D lottery results for a specific date.",
+      "type": "object",
+      "properties": {
+        "date": { "type": "string", "description": "Date of the record in YYYY-MM-DD format." },
+        "morning": { "type": "string", "description": "Morning result number (optional)." },
+        "evening": { "type": "string", "description": "Evening result number (optional)." },
+        "set_morning": { "type": "string", "description": "SET value for morning (optional)." },
+        "val_morning": { "type": "string", "description": "VAL value for morning (optional)." },
+        "set_evening": { "type": "string", "description": "SET value for evening (optional)." },
+        "val_evening": { "type": "string", "description": "VAL value for evening (optional)." }
+      },
+      "required": ["date"]
+    }
+  },
+  "firestore": {
+    "twod_history/{date}": {
+      "schema": "HistoricalRecord",
+      "description": "Collection of all 2D historical results indexed by date."
+    }
+  }
+}
