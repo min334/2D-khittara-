@@ -1,0 +1,6 @@
+{
+  "name": "Khittara AI - 2D Analytics",
+  "description": "2D Lottery Data Analytics & Calculation Engine powered by Gemini AI and Firebase.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
