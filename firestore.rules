@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() { return request.auth != null; }
+    function isEmailVerified() { return request.auth.token.email_verified == true; }
+    function isAdmin() { 
+      return isSignedIn() && request.auth.token.email == "minthitsar125226@gmail.com";
+    }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[0-9\\-]+$'); }
+
+    function isValidHistoricalRecord(data) {
+      return data.keys().hasAll(['date']) &&
+             data.date is string && data.date.size() <= 20 &&
+             (data.get('morning', '') is string) &&
+             (data.get('evening', '') is string);
+    }
+
+    // Records collection
+    match /twod_history/{date} {
+      allow read, write: if true;
+    }
+
+    match /_connection_test/{docId} {
+      allow read, write: if true;
+    }
+
+    match /chat_histories/{chatId} {
+      allow read, write: if true;
+    }
+
+    match /user_profiles/{userId} {
+      allow read, write: if true;
+    }
+  }
+}
